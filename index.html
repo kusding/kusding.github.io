@@ -8,20 +8,20 @@
 </head>
 <body>
     <div class="language-switcher">
-        <button onclick="switchToEnglish()">English</button>
-        <button onclick="switchToVietnamese()">Tiếng Việt</button>
+        <button onclick="switchToLanguage('en')">English</button>
+        <button onclick="switchToLanguage('vi')">Tiếng Việt</button>
     </div>
 
     <div class="container" id="content">
         <h1>Welcome to Kusding's Personal Page!</h1>
         <img src="https://images-ext-1.discordapp.net/external/Npt25SjuUuzPdE8jbnA5PzS263gPq9vmkoGK5UNT9ok/%3Fsize%3D4096/https/cdn.discordapp.com/avatars/993361614214533150/6d43be37602d336e784375ffec3eaa71.png?format=webp&quality=lossless&width=288&height=288" alt="Kusding" class="profile-pic">
         
-        <div class="about-me en">
+        <div class="about-me" id="en-content">
             <h2>About Me</h2>
             <p>Hello! I'm Kusding. Welcome to my personal page. Here you can find information about me and join my Discord server.</p>
         </div>
 
-        <div class="about-me vi" style="display:none;">
+        <div class="about-me" id="vi-content" style="display:none;">
             <h2>Thông Tin Cá Nhân</h2>
             <p>Xin chào! Tôi là Kusding. Chào mừng bạn đến với trang cá nhân của tôi. Ở đây bạn có thể tìm thông tin về tôi và tham gia vào máy chủ Discord của tôi.</p>
         </div>
