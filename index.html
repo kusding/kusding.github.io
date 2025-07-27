@@ -7,15 +7,26 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
   <style>
+    :root {
+      --bg-light: #f9f9f9;
+      --bg-dark: #1a1a1a;
+      --text-light: #333;
+      --text-dark: #eee;
+    }
     body {
       font-family: 'Inter', sans-serif;
       max-width: 800px;
       margin: auto;
       padding: 20px;
-      background: #f9f9f9;
-      color: #333;
+      background: var(--bg-light);
+      color: var(--text-light);
+      transition: background 0.3s, color 0.3s;
     }
-    .lang-btns {
+    .dark-mode {
+      background: var(--bg-dark);
+      color: var(--text-dark);
+    }
+    .lang-btns, .theme-toggle {
       margin-bottom: 20px;
     }
     button {
@@ -32,13 +43,6 @@
     button:hover {
       background-color: #404EED;
     }
-    img {
-      max-width: 200px;
-      display: block;
-      margin-bottom: 20px;
-      border-radius: 12px;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-    }
     .btn {
       display: inline-block;
       padding: 12px 20px;
@@ -49,14 +53,6 @@
       transition: all 0.3s ease-in-out;
       box-shadow: 0 2px 8px rgba(0,0,0,0.1);
     }
-    .btn.discord {
-      background-color: #5865F2;
-      color: white;
-    }
-    .btn.discord:hover {
-      background-color: #404EED;
-      transform: scale(1.05);
-    }
     .btn.game {
       background-color: #F5A623;
       color: white;
@@ -65,22 +61,63 @@
       background-color: #D48806;
       transform: scale(1.05);
     }
+    .btn.facebook {
+      background-color: #1877F2;
+      color: white;
+    }
+    .btn.facebook:hover {
+      background-color: #1558b0;
+      transform: scale(1.05);
+    }
+    .btn.email, .btn.discord {
+      background-color: #34A853;
+      color: white;
+    }
+    .btn.email:hover, .btn.discord:hover {
+      background-color: #2c8e44;
+      transform: scale(1.05);
+    }
+    .popup {
+      position: fixed;
+      bottom: 30px;
+      left: 50%;
+      transform: translateX(-50%);
+      background-color: #333;
+      color: white;
+      padding: 10px 20px;
+      border-radius: 10px;
+      display: none;
+      z-index: 999;
+      animation: fadein 0.5s, fadeout 0.5s 2.5s;
+    }
+    @keyframes fadein {
+      from {opacity: 0;}
+      to {opacity: 1;}
+    }
+    @keyframes fadeout {
+      from {opacity: 1;}
+      to {opacity: 0;}
+    }
   </style>
   <script defer>
     const translations = {
       en: {
         title: "Welcome to Kusding's Personal Page!",
         subtitle: "About Me",
-        desc: "Hello! I'm Kien or Kusding.I am aVietnamese person.A person like pop and rock(Ngot is my favourite band). I like play sport(like badminton) and learn programming language.If you want to contact me, you can message me via email,facebook or discord.",
-        game: "Play Catch the Food Game",
-        discord: "Join My Discord Server",
+        desc: "Hello! I'm Kien or Kusding. I am a Vietnamese person. A person who likes pop and rock (Ngọt is my favourite band). I like playing sports (like badminton) and learning programming languages. If you want to contact me, you can message me via email or Facebook.",
+        game: "🎮 Play Catch the Food Game",
+        facebook: "📘 Visit My Facebook",
+        email: "📧 Copy My Email",
+        discord: "💬 Copy My Discord"
       },
       vi: {
         title: "Chào mừng đến với trang cá nhân của Kusding!",
         subtitle: "Giới thiệu",
-        desc: "Xin chào! Mình là Kiên hoặc bạn có thể gọi mình là Kusding(nghe cho nó Tây). Mình là 1 người Việt Nam. Mình rất thích các thể loại nhạc như pop và rock(Ban nhạc Ngọt là ban nhạc mình yêu vcl). Mình khá thích chơi thể thao, đặc biệt là cầu lông.Liên hệ với mình qua mail, discord hoặc facebook nhé",
-        game: "Chơi game Bắt đồ ăn",
-        discord: "Tham gia server Discord của mình",
+        desc: "Xin chào! Mình là Kiên hoặc bạn có thể gọi mình là Kusding (nghe cho nó Tây). Mình là 1 người Việt Nam. Mình rất thích các thể loại nhạc như pop và rock (Ban nhạc Ngọt là ban nhạc mình yêu vcl). Mình khá thích chơi thể thao, đặc biệt là cầu lông. Liên hệ với mình qua mail hoặc Facebook nhé.",
+        game: "🎮 Chơi game Bắt đồ ăn",
+        facebook: "📘 Facebook của mình",
+        email: "📧 Sao chép Email",
+        discord: "💬 Sao chép Discord"
       }
     };
 
@@ -91,8 +128,21 @@
       });
     }
 
+    function copyText(text) {
+      navigator.clipboard.writeText(text).then(() => {
+        const popup = document.getElementById("popup");
+        popup.style.display = "block";
+        setTimeout(() => {
+          popup.style.display = "none";
+        }, 3000);
+      });
+    }
+
+    function toggleDarkMode() {
+      document.body.classList.toggle("dark-mode");
+    }
+
     window.addEventListener("DOMContentLoaded", () => {
-      // Animation effect on load
       document.querySelector("h1").classList.add("animate__animated", "animate__fadeInDown");
     });
   </script>
@@ -101,14 +151,18 @@
   <div class="lang-btns">
     <button onclick="setLanguage('en')">English</button>
     <button onclick="setLanguage('vi')">Tiếng Việt</button>
+    <button class="theme-toggle" onclick="toggleDarkMode()">🌓 Dark Mode</button>
   </div>
 
   <h1 data-i18n="title">Welcome to Kusding's Personal Page!</h1>
   <h2 data-i18n="subtitle">About Me</h2>
   <p data-i18n="desc">Hello! I'm Kusding...</p>
 
+  <a class="btn game" href="catch-the-food.html" data-i18n="game">🎮 Play Catch the Food Game</a><br />
+  <a class="btn facebook" href="https://www.facebook.com/kusdingkien/" target="_blank" data-i18n="facebook">📘 Visit My Facebook</a><br />
+  <button class="btn email" onclick="copyText('le8332346@gmail.com')" data-i18n="email">📧 My Email</button><br />
+  <button class="btn discord" onclick="copyText('kusding')" data-i18n="discord">💬 My Discord</button>
 
-  <a class="btn game" href="catch-the-food.html" data-i18n="game">Play Catch the Food Game</a><br />
-  <a class="btn discord" href="https://discord.gg/yourserver" data-i18n="discord">Join My Discord Server</a>
+  <div id="popup" class="popup">📋 Copied to clipboard!</div>
 </body>
 </html>
