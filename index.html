@@ -1,74 +1,40 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Kusding's Personal Page</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f4f4f4;
-            margin: 0;
-            padding: 0;
-        }
-        .container {
-            max-width: 800px;
-            margin: 0 auto;
-            padding: 20px;
-            background-color: #fff;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-        }
-        .profile-pic {
-            width: 200px;
-            border-radius: 50%;
-            display: block;
-            margin: 0 auto;
-        }
-        h1, h2 {
-            text-align: center;
-        }
-        .discord-section, .game-section {
-            text-align: center;
-            margin-top: 20px;
-        }
-        .discord-link, .game-link {
-            display: inline-block;
-            text-decoration: none;
-            background-color: #7289da;
-            color: white;
-            padding: 10px 20px;
-            border-radius: 5px;
-            font-size: 18px;
-        }
-        .game-link {
-            background-color: #4CAF50;
-        }
-        .discord-link img {
-            vertical-align: middle;
-            margin-right: 10px;
-            width: 30px; /* Discord icon size */
-            height: auto;
-        }
-    </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Kusding's personal website - Portfolio, Discord server, and game showcase." />
+  <title>Kusding's Personal Page</title>
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="icon" href="https://cdn-icons-png.flaticon.com/512/5968/5968756.png" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
 </head>
 <body>
-    <div class="container">
-        <h1>Welcome to Kusding's Personal Page!</h1>
-        <h2>About Me</h2>
-        <p>Hello! I'm Kusding. Welcome to my personal page where you can find information about me and join my Discord server.</p>
-        <div class="discord-section">
-            <a href="https://discord.gg/WGXfRQ2YPG" class="discord-link">
-                <img src="https://dl.memuplay.com/new_market/img/com.discord.icon.2024-01-05-03-09-38.png" alt="Discord"> Join My Discord Server
-            </a>
-        </div>
-        <div class="game-section">
-            <a href="https://kusding.github.io/catch-the-food/" class="game-link">
-                Play Catch the Food Game
-            </a>
-        </div>
-        <div id="language-switcher" style="text-align: center; margin-top: 20px;">
-            <a href="vi/index.html">Tiếng Việt</a>
-        </div>
+  <div class="container">
+    <div class="language-switcher">
+      <button onclick="switchLanguage('en')">English</button>
+      <button onclick="switchLanguage('vi')">Tiếng Việt</button>
     </div>
+
+    <h1 data-i18n="title">Welcome to Kusding's Personal Page!</h1>
+    <h2 data-i18n="subtitle">About Me</h2>
+    <p data-i18n="desc">
+      Hello! I'm Kusding. Welcome to my personal page where you can find information about me and join my Discord server.
+    </p>
+
+    <div class="discord-section">
+      <a href="https://discord.gg/WGXfRQ2YPG" class="discord-link">
+        <img src="https://dl.memuplay.com/new_market/img/com.discord.icon.2024-01-05-03-09-38.png" alt="Discord"> <span data-i18n="discord">Join My Discord Server</span>
+      </a>
+    </div>
+
+    <div class="game-section">
+      <a href="https://kusding.github.io/catch-the-food/" class="game-link" data-i18n="game">
+        Play Catch the Food Game
+      </a>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
 </body>
 </html>
